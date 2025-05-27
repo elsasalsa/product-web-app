@@ -30,6 +30,8 @@ WareUp adalah aplikasi web sederhana berbasis ASP.NET Core MVC untuk mengelola p
 git clone https://github.com/elsasalsa/product-web-app.git
 cd product-web-app
 
+git checkout master
+
 ⚙️ Setup Instructions
 1. Restore dependencies
     dotnet restore
