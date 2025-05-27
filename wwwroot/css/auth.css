@@ -1,0 +1,14 @@
+@media (max-width: 480px) {
+    .auth-card {
+        width: 100%;
+        max-width: none;
+        border-radius: 0;
+        padding: 20px;
+        box-shadow: none;
+    }
+
+    .auth-container {
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+}

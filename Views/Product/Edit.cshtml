@@ -1,0 +1,57 @@
+@model EditProductViewModel
+@using Microsoft.AspNetCore.Mvc.Rendering
+
+@{
+    ViewData["Title"] = "Edit Product";
+}
+
+<h2 class="mt-4 mb-4">Edit Product</h2>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form asp-action="Edit" enctype="multipart/form-data" method="post">
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="ExistingImagePath" />
+
+            <div class="mb-2">
+                <label asp-for="ProductName" class="form-label">Product Name</label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2">
+                <label class="form-label">Current Image</label><br />
+                @if (!string.IsNullOrEmpty(Model.ExistingImagePath))
+                {
+                    <img src="@Model.ExistingImagePath" alt="Product Image" style="max-width: 200px;" class="img-thumbnail" />
+                }
+                else
+                {
+                    <span>No image uploaded.</span>
+                }
+            </div>
+
+            <div class="mb-2">
+                <label asp-for="ProductImage" class="form-label">Change Image (optional)</label>
+                <input asp-for="ProductImage" type="file" class="form-control" />
+                <span asp-validation-for="ProductImage" class="text-danger"></span>
+            </div>
+
+            <div class="mb-2">
+                <label asp-for="CategoryId" class="form-label">Category Product</label>
+                <select asp-for="CategoryId" class="form-select" asp-items="@(ViewData["CategoryList"] as SelectList)">
+                    <option value="">-- Select Category --</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

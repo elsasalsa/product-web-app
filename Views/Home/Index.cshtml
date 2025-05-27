@@ -1,0 +1,12 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="d-flex justify-content-center mt-5">
+    <div class="card shadow-sm p-5">
+        <div class="card-body">
+            <h1 class="display-4 mb-3 text-center">Welcome, @(User?.Identity?.Name ?? "Guest")!</h1>
+            <p class="text-center">Glad to have you back. Explore the menu to manage your products and categories.</p>
+        </div>
+    </div>
+</div>

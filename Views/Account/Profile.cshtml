@@ -1,0 +1,50 @@
+@model ProductManagementApp.ViewModels.EditProfileViewModel
+
+@{
+    ViewData["Title"] = "Edit Profil";
+}
+
+<h2>Edit Profil</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<div class="card p-4 shadow-sm w-100">
+    <form asp-action="Profile" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+
+        <div class="mb-3 text-center">
+            <label>Foto Profil</label><br />
+            <img src="@(string.IsNullOrEmpty(Model.ProfilePicture) ? Url.Content("~/image/avatar.png") : Model.ProfilePicture)"
+                alt="Foto Profil" style="width: 80px; height: 80px; border-radius: 50%;" />
+            <input type="file" name="ProfilePictureFile" class="form-control mt-2" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Name">Nama</label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email">Email</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label>Password (kosongkan jika tidak ingin mengubah)</label>
+            <input asp-for="Password" type="password" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Simpan</button>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

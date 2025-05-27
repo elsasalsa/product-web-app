@@ -1,0 +1,117 @@
+@model List<ProductManagementApp.Models.Product>
+
+@{
+    ViewData["Title"] = "Product";
+    var deletedProduct = ViewData["DeletedProduct"] as List<ProductManagementApp.Models.Product>;
+}
+
+<h2 class="mb-5 mt-5">Product</h2>
+
+<div class="card shadow-sm">
+    <div class="card-header d-flex justify-content-end align-items-center">
+        <a class="btn btn-sm btn-primary" asp-action="Create">+ Add Product</a>
+        @* <button type="button" class="btn btn-sm btn-danger ms-2" data-bs-toggle="modal"
+            data-bs-target="#deletedProductModal">
+            Deleted Product
+        </button> *@
+    </div>
+
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-light">
+                <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Product Image</th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count == 0)
+                {
+                    <tr>
+                        <td colspan="3" class="text-center text-muted">No Product found.</td>
+                    </tr>
+                }
+                else
+                {
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>@(i + 1)</td>
+                            <td>@Model[i].ProductName</td>
+                            <td>
+                                <img src="@Model[i].ProductImage" alt="Product Image" width="120" height="120"
+                                    class="img-thumbnail" />
+                            </td>
+                            <td>@Model[i].ProductCategory?.CategoryName</td>
+                            <td>
+                                <a class="btn btn-sm btn-warning me-1" asp-action="Edit" asp-route-id="@Model[i].Id">Edit</a>
+                                <form asp-action="Delete" asp-route-id="@Model[i].Id" method="post" class="d-inline"
+                                    onsubmit="return confirm('Are you sure to delete this product?');">
+                                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Modal Deleted Product -->
+<div class="modal fade" id="deletedProductModal" tabindex="-1" aria-labelledby="deletedProductModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deletedProductModalLabel">Deleted Product</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @if (deletedProduct == null || deletedProduct.Count == 0)
+                {
+                    <p class="text-muted text-center">No deleted Product found.</p>
+                }
+                else
+                {
+                    <table class="table table-bordered table-sm">
+                        <thead class="table-light">
+                            <tr>
+                                <th>#</th>
+                                <th>Category Name</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < deletedProduct.Count; i++)
+                            {
+                                <tr>
+                                    <td>@(i + 1)</td>
+                                    <td>@deletedProduct[i].ProductName</td>
+                                    <td>
+                                        <form asp-action="Restore" asp-route-id="@deletedProduct[i].Id" method="post"
+                                            class="d-inline">
+                                            <button type="submit" class="btn btn-sm btn-success me-1">Restore</button>
+                                        </form>
+                                        <form asp-action="PermanentDelete" asp-route-id="@deletedProduct[i].Id" method="post"
+                                            class="d-inline">
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Are you sure you want to permanently delete this product?')">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
