@@ -16,14 +16,14 @@
         <input type="hidden" asp-for="Id" />
 
         <div class="mb-3 text-center">
-            <label>Foto Profil</label><br />
+            <label>Profile Picture</label><br />
             <img src="@(string.IsNullOrEmpty(Model.ProfilePicture) ? Url.Content("~/image/avatar.png") : Model.ProfilePicture)"
-                alt="Foto Profil" style="width: 80px; height: 80px; border-radius: 50%;" />
+                alt="Profile Picture" style="width: 80px; height: 80px; border-radius: 50%;" />
             <input type="file" name="ProfilePictureFile" class="form-control mt-2" />
         </div>
 
         <div class="mb-3">
-            <label asp-for="Name">Nama</label>
+            <label asp-for="Name">Name</label>
             <input asp-for="Name" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="mb-3">
-            <label>Password (kosongkan jika tidak ingin mengubah)</label>
+            <label>Password</label>
             <input asp-for="Password" type="password" class="form-control" />
         </div>
 

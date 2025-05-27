@@ -21,6 +21,26 @@
       "PackagePath": "staticwebassets\\image\\avatar.png"
     },
     {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\image\\favicon-color.png",
+      "PackagePath": "staticwebassets\\image\\favicon-color.png"
+    },
+    {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\image\\favicon.png",
+      "PackagePath": "staticwebassets\\image\\favicon.png"
+    },
+    {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\image\\faviicon.png",
+      "PackagePath": "staticwebassets\\image\\faviicon.png"
+    },
+    {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\12ea2dbd-425c-48b6-a29f-7c771bf90fdc.jpg",
+      "PackagePath": "staticwebassets\\images\\12ea2dbd-425c-48b6-a29f-7c771bf90fdc.jpg"
+    },
+    {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\12ef1761-dcc2-482b-9c40-83c643b9663d.jpg",
+      "PackagePath": "staticwebassets\\images\\12ef1761-dcc2-482b-9c40-83c643b9663d.jpg"
+    },
+    {
       "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\23fcf44f-5e88-4623-8867-66c8eff5fec0.jpg",
       "PackagePath": "staticwebassets\\images\\23fcf44f-5e88-4623-8867-66c8eff5fec0.jpg"
     },
@@ -33,6 +53,10 @@
       "PackagePath": "staticwebassets\\images\\42058d25-672b-43c4-b50b-c9fa942ee3c9.jpg"
     },
     {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\517f2aff-006b-44ad-859a-349b03e10256.jpg",
+      "PackagePath": "staticwebassets\\images\\517f2aff-006b-44ad-859a-349b03e10256.jpg"
+    },
+    {
       "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\5209888e-2228-48c2-ae0a-9876d1387478.jpg",
       "PackagePath": "staticwebassets\\images\\5209888e-2228-48c2-ae0a-9876d1387478.jpg"
     },
@@ -43,6 +67,10 @@
     {
       "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\89898793-188f-4e59-a5c3-11baa86c46e7.jpg",
       "PackagePath": "staticwebassets\\images\\89898793-188f-4e59-a5c3-11baa86c46e7.jpg"
+    },
+    {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\bda90b94-d350-4966-8ef1-fe73cf86d79a.jpg",
+      "PackagePath": "staticwebassets\\images\\bda90b94-d350-4966-8ef1-fe73cf86d79a.jpg"
     },
     {
       "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\profiles\\8c8dbea6-f8ef-49fb-960b-3cb4a8012222.png",
