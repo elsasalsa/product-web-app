@@ -32,9 +32,8 @@ cd product-web-app
 
 git checkout master
 
----
 
-### ⚙️ Setup Instructions
+⚙️ Setup Instructions
 
 1. Restore dependencies
     dotnet restore
