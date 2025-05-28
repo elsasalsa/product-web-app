@@ -32,6 +32,8 @@ cd product-web-app
 
 git checkout master
 
+---
+
 ### ⚙️ Setup Instructions
 
 1. Restore dependencies
