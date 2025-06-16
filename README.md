@@ -1,6 +1,6 @@
-# WareUp - Product Management App
+# Prodifity - Product Management App
 
-WareUp adalah aplikasi web sederhana berbasis ASP.NET Core MVC untuk mengelola produk dan kategori. Dibangun menggunakan .NET 8 dan Entity Framework Core dengan SQLite sebagai database lokal.
+Prodifity adalah aplikasi web sederhana berbasis ASP.NET Core MVC untuk mengelola produk dan kategori. Dibangun menggunakan .NET 8 dan Entity Framework Core dengan SQLite sebagai database lokal.
 
 ---
 
@@ -32,7 +32,9 @@ cd product-web-app
 
 git checkout master
 
+
 ⚙️ Setup Instructions
+
 1. Restore dependencies
     dotnet restore
 
