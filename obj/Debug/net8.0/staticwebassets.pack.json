@@ -69,8 +69,16 @@
       "PackagePath": "staticwebassets\\images\\89898793-188f-4e59-a5c3-11baa86c46e7.jpg"
     },
     {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\8f416943-1b59-47b4-8b59-3c05f3c8ddc6.jpg",
+      "PackagePath": "staticwebassets\\images\\8f416943-1b59-47b4-8b59-3c05f3c8ddc6.jpg"
+    },
+    {
       "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\bda90b94-d350-4966-8ef1-fe73cf86d79a.jpg",
       "PackagePath": "staticwebassets\\images\\bda90b94-d350-4966-8ef1-fe73cf86d79a.jpg"
+    },
+    {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\f5829ff5-7043-46f5-be69-cf85c9ea127f.jpg",
+      "PackagePath": "staticwebassets\\images\\f5829ff5-7043-46f5-be69-cf85c9ea127f.jpg"
     },
     {
       "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\profiles\\8c8dbea6-f8ef-49fb-960b-3cb4a8012222.png",
@@ -307,6 +315,10 @@
     {
       "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\uploads\\6205563c-5ce6-4aa4-b0c9-56feddab5542.png",
+      "PackagePath": "staticwebassets\\uploads\\6205563c-5ce6-4aa4-b0c9-56feddab5542.png"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.ProductManagementApp.Microsoft.AspNetCore.StaticWebAssets.props",

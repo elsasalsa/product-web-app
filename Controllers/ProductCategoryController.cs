@@ -30,7 +30,6 @@ namespace ProductManagementApp.Controllers
                 .Where(c => c.UserId == userId && c.IsDeleted) // yang sudah dihapus
                 .ToListAsync();
 
-            // buat ViewModel sederhana, bisa juga pakai model baru kalau mau
             ViewData["DeletedCategories"] = deletedCategories;
 
             return View(categories);

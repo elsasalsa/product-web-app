@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "il1Inm7tbL7sN8d4oDMqjYx+CX7VBLWHbEpC+raIJ7M=",
+  "Hash": "rRITl757Z/s2HRrq0N7sTcih16c86BaKite/YX9VyqY=",
   "Source": "ProductManagementApp",
   "BasePath": "_content/ProductManagementApp",
   "Mode": "Default",
@@ -359,6 +359,25 @@
       "OriginalItemSpec": "wwwroot\\images\\89898793-188f-4e59-a5c3-11baa86c46e7.jpg"
     },
     {
+      "Identity": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\8f416943-1b59-47b4-8b59-3c05f3c8ddc6.jpg",
+      "SourceId": "ProductManagementApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\",
+      "BasePath": "_content/ProductManagementApp",
+      "RelativePath": "images/8f416943-1b59-47b4-8b59-3c05f3c8ddc6.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\8f416943-1b59-47b4-8b59-3c05f3c8ddc6.jpg"
+    },
+    {
       "Identity": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\bda90b94-d350-4966-8ef1-fe73cf86d79a.jpg",
       "SourceId": "ProductManagementApp",
       "SourceType": "Discovered",
@@ -376,6 +395,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\bda90b94-d350-4966-8ef1-fe73cf86d79a.jpg"
+    },
+    {
+      "Identity": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\f5829ff5-7043-46f5-be69-cf85c9ea127f.jpg",
+      "SourceId": "ProductManagementApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\",
+      "BasePath": "_content/ProductManagementApp",
+      "RelativePath": "images/f5829ff5-7043-46f5-be69-cf85c9ea127f.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\f5829ff5-7043-46f5-be69-cf85c9ea127f.jpg"
     },
     {
       "Identity": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\images\\profiles\\8c8dbea6-f8ef-49fb-960b-3cb4a8012222.png",
@@ -1497,6 +1535,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\uploads\\6205563c-5ce6-4aa4-b0c9-56feddab5542.png",
+      "SourceId": "ProductManagementApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\net\\TASK1\\ProductManagementApp\\wwwroot\\",
+      "BasePath": "_content/ProductManagementApp",
+      "RelativePath": "uploads/6205563c-5ce6-4aa4-b0c9-56feddab5542.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\6205563c-5ce6-4aa4-b0c9-56feddab5542.png"
     }
   ]
 }

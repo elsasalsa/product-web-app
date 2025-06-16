@@ -5,9 +5,7 @@ using ProductManagementApp.Models;
 using ProductManagementApp.ViewModels;
 using ProductManagementApp.Data;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-
 
 namespace ProductManagementApp.Controllers
 {
@@ -15,11 +13,13 @@ namespace ProductManagementApp.Controllers
     {
         private readonly AppDbContext _context;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly PasswordHasher<User> _passwordHasher;
 
         public AccountController(AppDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _webHostEnvironment = webHostEnvironment;
+            _passwordHasher = new PasswordHasher<User>();
         }
 
         [HttpGet]
@@ -38,8 +38,7 @@ namespace ProductManagementApp.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            var user = _context.Users
-                .FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
 
             if (user == null)
             {
@@ -47,9 +46,16 @@ namespace ProductManagementApp.Controllers
                 return View(model);
             }
 
+            var result = _passwordHasher.VerifyHashedPassword(user, user.Password, model.Password);
+            if (result == PasswordVerificationResult.Failed)
+            {
+                ModelState.AddModelError("", "Email or Password is incorrect");
+                return View(model);
+            }
+
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Name), // <-- sini yang diubah
+                new Claim(ClaimTypes.Name, user.Name),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim("UserId", user.Id.ToString())
             };
@@ -87,10 +93,12 @@ namespace ProductManagementApp.Controllers
             var user = new User
             {
                 Email = model.Email,
-                Password = model.Password,
                 Name = model.Name,
                 ProfilePicture = ""
             };
+
+            // Hash password sebelum disimpan
+            user.Password = _passwordHasher.HashPassword(user, model.Password);
 
             _context.Users.Add(user);
             _context.SaveChanges();
@@ -142,14 +150,18 @@ namespace ProductManagementApp.Controllers
             user.Name = model.Name;
             user.Email = model.Email;
 
+            // Hash password baru jika diisi
             if (!string.IsNullOrEmpty(model.Password))
             {
-                user.Password = model.Password; // Update password hanya jika diisi
+                user.Password = _passwordHasher.HashPassword(user, model.Password);
             }
 
             if (model.ProfilePictureFile != null && model.ProfilePictureFile.Length > 0)
             {
                 var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "uploads");
+                if (!Directory.Exists(uploadsFolder))
+                    Directory.CreateDirectory(uploadsFolder);
+
                 var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ProfilePictureFile.FileName);
                 var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
@@ -166,6 +178,5 @@ namespace ProductManagementApp.Controllers
             TempData["Success"] = "Profil berhasil diperbarui";
             return RedirectToAction("Profile");
         }
-
     }
 }
