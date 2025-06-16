@@ -20,21 +20,18 @@ namespace ProductManagementApp.Controllers
         // GET: ProductCategory
         public async Task<IActionResult> Index()
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
             var categories = await _context.ProductCategories
-                .Where(c => c.UserId == userId && !c.IsDeleted) // aktif
+                .Where(c => !c.IsDeleted)
                 .ToListAsync();
 
             var deletedCategories = await _context.ProductCategories
-                .Where(c => c.UserId == userId && c.IsDeleted) // yang sudah dihapus
+                .Where(c => c.IsDeleted)
                 .ToListAsync();
 
             ViewData["DeletedCategories"] = deletedCategories;
 
             return View(categories);
         }
-
 
         // GET: ProductCategory/Create
         public IActionResult Create()
@@ -58,15 +55,13 @@ namespace ProductManagementApp.Controllers
             return View(category);
         }
 
-
         // GET: ProductCategory/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
 
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var category = await _context.ProductCategories
-                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId);
+                .FirstOrDefaultAsync(c => c.Id == id);
 
             if (category == null) return NotFound();
 
@@ -86,8 +81,7 @@ namespace ProductManagementApp.Controllers
             {
                 try
                 {
-                    var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-                    category.UserId = userId;
+                    category.UserId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
                     _context.Update(category);
                     await _context.SaveChangesAsync();
                 }
@@ -107,9 +101,8 @@ namespace ProductManagementApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var category = await _context.ProductCategories
-                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId && !c.IsDeleted);
+                .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
 
             if (category == null) return NotFound();
 
@@ -125,9 +118,8 @@ namespace ProductManagementApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Restore(int id)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var category = await _context.ProductCategories
-                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId && c.IsDeleted);
+                .FirstOrDefaultAsync(c => c.Id == id && c.IsDeleted);
 
             if (category == null) return NotFound();
 
@@ -143,9 +135,8 @@ namespace ProductManagementApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PermanentDelete(int id)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var category = await _context.ProductCategories
-                .FirstOrDefaultAsync(c => c.Id == id && c.UserId == userId && c.IsDeleted);
+                .FirstOrDefaultAsync(c => c.Id == id && c.IsDeleted);
 
             if (category == null) return NotFound();
 
@@ -154,7 +145,5 @@ namespace ProductManagementApp.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-
     }
 }

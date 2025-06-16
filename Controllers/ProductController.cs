@@ -21,16 +21,14 @@ namespace ProductManagementApp.Controllers
         // GET: Product
         public async Task<IActionResult> Index()
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
             var products = await _context.Products
                 .Include(p => p.ProductCategory)
-                .Where(p => p.UserId == userId && !p.IsDeleted)
+                .Where(p => !p.IsDeleted)
                 .ToListAsync();
 
             var deletedProducts = await _context.Products
                 .Include(p => p.ProductCategory)
-                .Where(p => p.UserId == userId && p.IsDeleted)
+                .Where(p => p.IsDeleted)
                 .ToListAsync();
 
             ViewData["DeletedProduct"] = deletedProducts;
@@ -41,15 +39,10 @@ namespace ProductManagementApp.Controllers
         // GET: Product/Create
         public async Task<IActionResult> Create()
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userIdClaim))
-            {
-                return Unauthorized();
-            }
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
-            var userId = int.Parse(userIdClaim);
             ViewBag.Categories = await _context.ProductCategories
-                .Where(c => c.UserId == userId && !c.IsDeleted)
+                .Where(c => !c.IsDeleted)
                 .ToListAsync();
 
             return View();
@@ -60,25 +53,17 @@ namespace ProductManagementApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Product product, IFormFile ProductImage)
         {
-            var userIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (string.IsNullOrEmpty(userIdClaim))
-            {
-                return Unauthorized();
-            }
-
-            var userId = int.Parse(userIdClaim);
+            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
             if (!ModelState.IsValid)
             {
-                // Ambil ulang kategori jika terjadi error validasi
                 ViewBag.Categories = await _context.ProductCategories
-                    .Where(c => c.UserId == userId && !c.IsDeleted)
+                    .Where(c => !c.IsDeleted)
                     .ToListAsync();
 
                 return View(product);
             }
 
-            // Simpan file gambar ke wwwroot/images
             if (ProductImage != null && ProductImage.Length > 0)
             {
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(ProductImage.FileName);
@@ -106,10 +91,8 @@ namespace ProductManagementApp.Controllers
         {
             if (id == null) return NotFound();
 
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
-
             var product = await _context.Products
-                .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId);
+                .FirstOrDefaultAsync(p => p.Id == id);
 
             if (product == null) return NotFound();
 
@@ -123,7 +106,7 @@ namespace ProductManagementApp.Controllers
 
             ViewData["CategoryList"] = new SelectList(
                 await _context.ProductCategories
-                    .Where(c => c.UserId == userId && !c.IsDeleted)
+                    .Where(c => !c.IsDeleted)
                     .ToListAsync(),
                 "Id", "CategoryName",
                 viewModel.CategoryId
@@ -145,7 +128,7 @@ namespace ProductManagementApp.Controllers
             {
                 ViewData["CategoryList"] = new SelectList(
                     await _context.ProductCategories
-                        .Where(c => c.UserId == userId && !c.IsDeleted)
+                        .Where(c => !c.IsDeleted)
                         .ToListAsync(),
                     "Id", "CategoryName",
                     model.CategoryId
@@ -153,7 +136,7 @@ namespace ProductManagementApp.Controllers
                 return View(model);
             }
 
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId);
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
             if (product == null)
                 return NotFound();
 
@@ -163,7 +146,6 @@ namespace ProductManagementApp.Controllers
 
             if (model.ProductImage != null && model.ProductImage.Length > 0)
             {
-                // Simpan file gambar baru
                 var fileName = Guid.NewGuid().ToString() + Path.GetExtension(model.ProductImage.FileName);
                 var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", fileName);
 
@@ -176,7 +158,6 @@ namespace ProductManagementApp.Controllers
             }
             else if (!string.IsNullOrEmpty(model.ExistingImagePath))
             {
-                // Gunakan gambar lama kalau tidak upload gambar baru
                 product.ProductImage = model.ExistingImagePath;
             }
 
@@ -187,7 +168,7 @@ namespace ProductManagementApp.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!_context.Products.Any(e => e.Id == id && e.UserId == userId))
+                if (!_context.Products.Any(e => e.Id == id))
                     return NotFound();
                 else
                     throw;
@@ -200,14 +181,10 @@ namespace ProductManagementApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var product = await _context.Products
-                .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId);
+                .FirstOrDefaultAsync(p => p.Id == id && !p.IsDeleted);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
             product.IsDeleted = true;
             await _context.SaveChangesAsync();
@@ -219,14 +196,10 @@ namespace ProductManagementApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Restore(int id)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var product = await _context.Products
-                .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId && p.IsDeleted);
+                .FirstOrDefaultAsync(p => p.Id == id && p.IsDeleted);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
             product.IsDeleted = false;
             await _context.SaveChangesAsync();
@@ -238,14 +211,10 @@ namespace ProductManagementApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PermanentDelete(int id)
         {
-            var userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
             var product = await _context.Products
-                .FirstOrDefaultAsync(p => p.Id == id && p.UserId == userId && p.IsDeleted);
+                .FirstOrDefaultAsync(p => p.Id == id && p.IsDeleted);
 
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();
